@@ -24,8 +24,10 @@ module.exports = function (sequelize, DataTypes) {
       },
       tier: {
         type: DataTypes.STRING
+      },
+      fetured: {
+        type: DataTypes.BOOLEAN
       }
-
 
       
     });
