@@ -3,6 +3,8 @@ const db = require("../models")
 
 
 //////Creates Product///////
+///////////////////////////////////
+///////////////PROTECT//////////////
 router.post("/api/product", async (req,res) => {
 const data = await db.Product.create(req.body).catch(err => {
 
@@ -11,6 +13,8 @@ const data = await db.Product.create(req.body).catch(err => {
 })
      res.json(data)
 })
+///////////////////////////////////
+
 
 //////Returns  all Products ///////
 router.get("/api/product", async (req,res) => {
