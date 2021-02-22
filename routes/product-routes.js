@@ -3,8 +3,13 @@ const db = require("../models")
 
 
 
-router.post("/api/product", (req,res) => {
-db.Product.create(req.body).then(data => console.log(res.json(data).catch(err=> console.log(err))))
+router.post("/api/product", async (req,res) => {
+const data = await db.Product.create(req.body).catch(err => {
+
+    res.status(500);
+    console.error(err)
+})
+     res.json(data)
 })
 
 
