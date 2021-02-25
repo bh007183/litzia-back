@@ -1,33 +1,49 @@
 
+
 module.exports = function (sequelize, DataTypes) {
     const Product = sequelize.define("Product", {
-      title: { type: DataTypes.STRING,
+      title: { 
+        type: DataTypes.STRING,
          allowNull: false,
          unique: true },
 
       image: DataTypes.STRING,
 
-      description: {
+      
+      customerDescription: {
         type: DataTypes.TEXT,
         allowNull: false,
       },
+
+      InventoryItem: {
+        type: DataTypes.BOOLEAN
+      },
+
       category: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING
       },
 
       price: {
         type: DataTypes.INTEGER,
       },
-
-      quantity: {
+      cost: {
         type: DataTypes.INTEGER,
       },
+
+      QuantityInStock: {
+        type: DataTypes.INTEGER,
+      },
+
       tier: {
         type: DataTypes.STRING
       },
       fetured: {
         type: DataTypes.BOOLEAN
-      }
+      },
+
+      updatedBy: {
+        type: DataTypes.STRING,
+      },
 
       
     });
@@ -36,3 +52,4 @@ module.exports = function (sequelize, DataTypes) {
     }
    return Product
 }
+
