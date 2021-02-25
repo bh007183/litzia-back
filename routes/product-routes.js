@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const db = require("../models");
 const axios = require("axios");
-
+const dotenv = require("dotenv")
+dotenv.config()
 //////Creates Product///////
 ///////////////////////////////////
 ///////////////PROTECT//////////////
@@ -19,12 +20,28 @@ router.get("/api/product", async (req, res) => {
     
   axios
     .get(
-      "https://api-na.myconnectwise.net/v4_6_release/apis/3.0/procurement/catalog/?pageSize=300",
+      "https://api-na.myconnectwise.net/v4_6_release/apis/3.0/procurement/catalog/?pageSize=100",
       {
         headers: {
           Authorization:
-            "this",
-          clientId: "this",
+            process.env.Key_one,
+          clientId: process.env.Key_two,
+        },
+      }
+    )
+    .then((response) => res.send(response.data))
+    .catch((err) => res.send(err));
+});
+router.get("/api/subcategory", async (req, res) => {
+    
+  axios
+    .get(
+      "https://api-na.myconnectwise.net/v4_6_release/apis/3.0/procurement/subcategories?pageSize=100",
+      {
+        headers: {
+          Authorization:
+            process.env.Key_one,
+          clientId: process.env.Key_two,
         },
       }
     )
