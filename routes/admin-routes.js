@@ -23,7 +23,7 @@ router.post("/api/admin/login", async (req, res) => {
     .compare(req.body.password, data.password)
     .catch((err) => res.status(403).json(err));
   if (match) {
-      //////////need to set private key///////////////
+    //////////need to set private key///////////////
     jwt.sign(data.toJSON(), "privatekey", { expiresIn: "1h" }, (err, token) => {
       if (err) {
         console.log(err);
@@ -79,4 +79,37 @@ router.delete("/api/admin/delete", async (req, res) => {
   }
   res.json(data).status(200).end();
 });
+
+// Update Admin
+router.put("/api/admin/:AdminId", async (req, res) => {
+  if (!req.body.password) {
+    req.body.password === req.body.password;
+    const data = await db.Admin.update(req.body, {
+      where: { id: req.body.id },
+    }).catch((err) => {
+      res.status(500);
+      console.error(err);
+    });
+    res.status(200).json(data);
+  } else {
+    const newPwd = (req.body.password = bcrypt.hashSync(
+      req.body.password,
+      bcrypt.genSaltSync(10),
+      null
+    ));
+    // update the password that comes from req.body to be the new hashed password
+    req.body.password = newPwd;
+
+    // update the database with that hashed password
+    const data = await db.Admin.update(req.body, {
+      where: { id: req.body.id },
+    }).catch((err) => {
+      res.status(500);
+      console.error(err);
+    });
+
+    res.status(200).json(data);
+  }
+});
+
 module.exports = router;
