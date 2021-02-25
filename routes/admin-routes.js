@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 //////Admin Login/////////
 
 router.post("/api/admin/login", async (req, res) => {
-  console.log(req.body);
+
   const data = await db.Admin.findOne({
     where: {
       username: req.body.username,
@@ -23,16 +23,23 @@ router.post("/api/admin/login", async (req, res) => {
     .compare(req.body.password, data.password)
     .catch((err) => res.status(403).json(err));
   if (match) {
+<<<<<<< HEAD
     //////////need to set private key///////////////
     jwt.sign(data.toJSON(), "privatekey", { expiresIn: "1h" }, (err, token) => {
+=======
+      //////////need to set private key///////////////
+      console.log(data.dataValues)
+    const token = jwt.sign({email: data.dataValues.email, id: data.dataValues.id}, "privatekey", { expiresIn: "1h" }, (err, token) => {
+>>>>>>> dev
       if (err) {
         console.log(err);
       }
       console.log("this is ", match);
-      res.json({ AdminId: data.id, auth: token }).status(200).end();
+      res.json({ auth: token }).status(200).end();
+      
     });
   } else {
-    console.log("ERROR IN THE HOUSE!!!! STOP OR YOULL BREAK IT!!!!");
+    res.send("Password or Username did not match");
   }
 });
 
@@ -54,7 +61,34 @@ router.post("/api/admin", async (req, res) => {
 
 /////Delete Admin//////
 router.delete("/api/admin/delete", async (req, res) => {
-  console.log(req.body);
+  let token = false;
+  if(!req.headers){
+    token=false;
+  }else if(!req.headers.authorization){
+    token = false;
+  }
+  else{
+    token = req.headers.authorization.split(" ")[1]
+  }
+  if(!token){
+    res.status(403).send("Please Login")
+  }
+  else{
+    let tokenMatch = jwt.verify(token, "privatekey", (err, verify)=>{
+      if(err){
+        return false
+      }else{
+        return verify
+      }
+    })
+    if(tokenMatch){
+      res.send("authorized")
+      
+    }else{
+      res.status(403).send('auth fail')
+    }
+  }
+  
   const data = await db.Admin.findOne({
     where: {
       username: req.body.username,
