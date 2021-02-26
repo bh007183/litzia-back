@@ -28,6 +28,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 834,
@@ -43,6 +44,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 748,
@@ -57,6 +59,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 776,
@@ -71,6 +74,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 779,
@@ -85,6 +89,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 813,
@@ -100,6 +105,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 001,
@@ -114,6 +120,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 002,
@@ -128,6 +135,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 003,
@@ -142,9 +150,10 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
-    id: 1014,
+    id: 004,
     title: "Office365",
     image: "http://placekitten.com/g/200/300",
     description: ` Work from anywhere on all your devices with all your familiar Microsoft 365 applications, backed by Dell’s Cloud Concierge Service.
@@ -157,6 +166,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 1014,
@@ -171,6 +181,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 759,
@@ -185,6 +196,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 802,
@@ -199,6 +211,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 803,
@@ -213,6 +226,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 804,
@@ -227,9 +241,10 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
-    id: 804,
+    id: 805,
     title: "ServerWatch Gold",
     image: "http://placekitten.com/g/200/300",
     description: ` Server Watch GOld description here.`,
@@ -241,11 +256,16 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
 ];
 
 const seed = () => {
-  db.Admin.bulkCreate(admin).then(() => db.Product.bulkCreate(product));
+  db.Admin.bulkCreate(admin)
+    .then(() => db.Product.bulkCreate(product))
+    .catch((err) => {
+      console.error(err);
+    });
 };
 
 seed();
