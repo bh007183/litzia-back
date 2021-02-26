@@ -1,14 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
   const Product = sequelize.define("Product", {
-<<<<<<< HEAD
-=======
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-    },
-
->>>>>>> 0a3b13b6cbc8b83e2f96329159303b29d2433a46
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -17,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
 
     image: DataTypes.STRING,
 
-    customerDescription: {
+    description: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -33,11 +24,11 @@ module.exports = function (sequelize, DataTypes) {
     price: {
       type: DataTypes.INTEGER,
     },
-    cost: {
+    price: {
       type: DataTypes.INTEGER,
     },
 
-    QuantityInStock: {
+    quantity: {
       type: DataTypes.INTEGER,
     },
 
@@ -46,18 +37,16 @@ module.exports = function (sequelize, DataTypes) {
     },
     featured: {
       type: DataTypes.BOOLEAN,
+      default: false,
     },
 
     updatedBy: {
       type: DataTypes.STRING,
     },
-<<<<<<< HEAD
-=======
 
     tax: { type: DataTypes.STRING },
 
     shipping: { type: DataTypes.STRING },
->>>>>>> 0a3b13b6cbc8b83e2f96329159303b29d2433a46
   });
   Product.associate = function (models) {
     Product.belongsTo(models.Admin);
