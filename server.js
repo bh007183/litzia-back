@@ -3,6 +3,11 @@ const app = express();
 const cors = require("cors");
 const db = require("./models");
 
+<<<<<<< HEAD
+=======
+require("dotenv").config();
+
+>>>>>>> 0a3b13b6cbc8b83e2f96329159303b29d2433a46
 var PORT = process.env.PORT || 3005;
 
 app.use(express.urlencoded({ extended: true }));

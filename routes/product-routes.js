@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const db = require("../models");
 const axios = require("axios");
-const dotenv = require("dotenv")
-dotenv.config()
+const dotenv = require("dotenv");
+dotenv.config();
 //////Creates Product///////
 ///////////////////////////////////
 ///////////////PROTECT//////////////
@@ -17,14 +17,12 @@ router.post("/api/product", async (req, res) => {
 
 //////Returns  all Products ///////
 router.get("/api/product", async (req, res) => {
-    
   axios
     .get(
       "https://api-na.myconnectwise.net/v4_6_release/apis/3.0/procurement/catalog/?pageSize=100",
       {
         headers: {
-          Authorization:
-            process.env.Key_one,
+          Authorization: process.env.Key_one,
           clientId: process.env.Key_two,
         },
       }
@@ -33,14 +31,12 @@ router.get("/api/product", async (req, res) => {
     .catch((err) => res.send(err));
 });
 router.get("/api/subcategory", async (req, res) => {
-    
   axios
     .get(
       "https://api-na.myconnectwise.net/v4_6_release/apis/3.0/procurement/subcategories?pageSize=100",
       {
         headers: {
-          Authorization:
-            process.env.Key_one,
+          Authorization: process.env.Key_one,
           clientId: process.env.Key_two,
         },
       }
@@ -64,10 +60,10 @@ router.get("/api/product/:category", async (req, res) => {
 });
 
 ////////Returns Fetured Products/////////
-router.get("/api/product/:fetured", async (req, res) => {
+router.get("/api/product/:featured", async (req, res) => {
   const data = await db.Product.findAll({
     where: {
-      fetured: req.params.fetured,
+      featured: req.params.featured,
     },
   }).catch((err) => {
     res.status(500);
