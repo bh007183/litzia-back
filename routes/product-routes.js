@@ -2,17 +2,46 @@ const router = require("express").Router();
 const db = require("../models");
 const axios = require("axios");
 const dotenv = require("dotenv")
+const jwt = require("jsonwebtoken")
 dotenv.config()
 //////Creates Product///////
 ///////////////////////////////////
 ///////////////PROTECT//////////////
 router.post("/api/product", async (req, res) => {
-  const data = await db.Product.create(req.body).catch((err) => {
-    res.status(500);
-    console.error(err);
-  });
-  res.json(data);
+  console.log(req.headers)
+  let token = false
+if(!req.headers){
+  token = false
+}else if (!req.headers.authorization){
+  token = false
+}else{
+  token = req.headers.authorization.split(" ")[1]
+  console.log(token)
+}
+
+if(!token){
+  res.status(403).send("Please Login")
+}else {
+  const varify = jwt.verify(token, "privatekey", (err,data)=>{
+    if(err){
+      return false
+    }else {
+      return data
+    }
+  })
+  if(varify){
+    const data = await db.Product.create(req.body).catch((err) => {
+      res.status(500);
+      console.error(err);
+    });
+    res.json(data);
+  }else{
+    return res.status(403).send("auth failed")
+  }
+}
+
 });
+
 ///////////////////////////////////
 
 //////Returns  all Products ///////

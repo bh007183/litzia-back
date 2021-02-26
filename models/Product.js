@@ -20,7 +20,8 @@ module.exports = function (sequelize, DataTypes) {
       },
 
       category: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
       },
 
       price: {
