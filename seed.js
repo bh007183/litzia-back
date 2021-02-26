@@ -17,10 +17,10 @@ const product = [
   {
     id: 840,
     title: `Lenovo ThinkPad T530 15.6"`,
-    image: "utils/images/LenovoThinkPadT530.jpeg",
+    image: "src/utils/images/LenovoThinkPadT530.jpeg",
     description: `
     Lenovo ThinkPad T530 15.6" LED Notebook with Intel Core i5 i5-3210M 2.5GHz and a 1366 x 768 HD Display preinstalled 4 GB RAM  and a  500 GB HDD and DVD-Writer included. Features Intel HD 4000 Graphics Card,Webcam and Genuine Windows 7 Professional. Estimated Battery life is 9.10 Hour Battery and uses DisplayPort for external connection`,
-    category: "hardware",
+    category: "computer",
     price: "450",
     quantity: 50,
     tier: "two",
@@ -28,14 +28,15 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 834,
     title: `Lenovo ThinkCentre M72e`,
-    image: "utils/images/ThinkCenter.jpg",
+    image: "http://placekitten.com/g/200/300",
     description: `
     Lenovo ThinkCentre M72e Desktop Computer with Intel Core i3 i3-3220 3.3GHz with a Small Form Factor and preinstalled 4 GB RAM and a 500 GB HDD and DVD-Writer. Features Intel HD 2500 Graphics Card and Genuine Windows 7 Professional uses DVI and comes with a 3-Year Warranty *monitor NOT INCLUDED`,
-    category: "hardware",
+    category: "computer",
     price: "450",
     quantity: 50,
     tier: "two",
@@ -43,13 +44,14 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 748,
     title: `Litzia Workstation Special`,
-    image: "utils/images/workstation.jpg",
+    image: "src/utils/images/workstation.jpg",
     description: `Network Certified Workstation Intel 1.8 GHZ Pentium 4 Processor with 512k cache High Speed Motherboard 400/533mhz bus 32 Bit PCI Bus Mastering Architecture Intel ChipSet Shared AGP Videot / 4 USB 2.0 Ports 1 Mouse / 1 Parallel / 2 Serial Ports 10/100 Ethernet LAN Adapter Audio/Sound Adapter 1200 Megabytes of High Speed DDR SDRAM Memory 300 Watt Power Supply 40 Gigabyte Hard Drive Ultra Enhanced IDE Interface 9.5 Millisecond Access Time CD-ROM Player Internal 52x Speed Enhanced IDE Interface 1.44 Megabyte Floppy Drive 3.5" 104 Key Windows Enhanced Keyboard Optical Three Button Mouse with Scroll Wheel - PS2/USB Windows XP Professional with CD`,
-    category: "hardware",
+    category: "computer",
     price: "250",
     quantity: 50,
     tier: "two",
@@ -57,13 +59,14 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 776,
     title: `Dell PowerEdge T410`,
-    image: "utils/images/PowerEdgeT410.jpg",
+    image: "src/utils/images/PowerEdgeT410.jpg",
     description: `Dell PowerEdge T410 tower server with Intel Xeon E-2224G 3.5GHz Processor included tower case with 8GB RAM and a 1TB HDD and an optical drive. OS not installed`,
-    category: "hardware",
+    category: "computer",
     price: "250",
     quantity: 50,
     tier: "two",
@@ -71,13 +74,14 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 779,
     title: `Dell PowerEdge T310`,
-    image: "utils/images/workstation.jpg",
+    image: "src/utils/images/workstation.jpg",
     description: `Dell PowerEdge T40 tower server with Intel Xeon x4340 2.4GHz Processor included tower case with 16GB RAM and 2 Dell 146GB SAS Drives, SAS 6i Raid Controller,OS not installed`,
-    category: "hardware",
+    category: "computer",
     price: "250",
     quantity: 50,
     tier: "two",
@@ -85,14 +89,15 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 813,
     title: `Lenovo ThinkServer RD630`,
-    image: "utils/images/workstation.jpg",
+    image: "src/utils/images/workstation.jpg",
     description: `Lenovo ThinkServer RD630 Rack Server w/ (2) Intel Xeon E5-2620 6 Core Processors for 12 cores total, 48GB RAM, 3 GB Usable disk Space with (6) 1TB 7.2K 6Gbps SCSI 3.5" Hot Plug Hard Drives for RAID 10, Raid 700 adaptor; 800W Dual Hot-Plug Redundant Power Supply; QuadPort Network Adaptor; Premium Management adaptor; 5-Yr Hardware Warranty NBD Onsite Hardware Repair Service
     `,
-    category: "hardware",
+    category: "computer",
     price: "250",
     quantity: 50,
     tier: "two",
@@ -100,13 +105,14 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 001,
     title: "Xerox PrimeLink",
     image: "http://placekitten.com/g/200/300",
     description: ` Xerox PrimeLink with color MFP and support for 330 x 660mm banner printing. Reliable service you come to know with xerox.`,
-    category: "hardware",
+    category: "xerox",
     price: 100.0,
     quantity: 2000,
     tier: "one",
@@ -114,6 +120,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 002,
@@ -128,13 +135,14 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 003,
     title: "Xerox B215 Multifunction Printer",
     image: "http://placekitten.com/g/200/300",
     description: ` Black and White MFP with support for Letter/Legal. Copy, print, scan, fax, email on a small foot print - Built-in Wi-Fi, Compact foot print. 3.5" capacitive color touch screen user interface, and fast printing with crisp, clear text & graphics and the full array of mobile platforms. All with the Reliable service you come to know with Xerox.`,
-    category: "hardware",
+    category: "xerox",
     price: 100.0,
     quantity: 2000,
     tier: "one",
@@ -142,9 +150,10 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
-    id: 1014,
+    id: 004,
     title: "Office365",
     image: "http://placekitten.com/g/200/300",
     description: ` Work from anywhere on all your devices with all your familiar Microsoft 365 applications, backed by Dell’s Cloud Concierge Service.
@@ -157,13 +166,14 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 1014,
     title: "Managed Offsite Back-Up",
     image: "http://placekitten.com/g/200/300",
     description: ` Managed Offsite Back-Up description here .`,
-    category: "service",
+    category: "security",
     price: 100.0,
     quantity: 2000,
     tier: "one",
@@ -171,13 +181,14 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 759,
     title: "TakeCharge BDR Advance",
     image: "http://placekitten.com/g/200/300",
     description: `Software security description here.`,
-    category: "software",
+    category: "security",
     price: 100.0,
     quantity: 2000,
     tier: "one",
@@ -185,6 +196,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 802,
@@ -199,6 +211,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 803,
@@ -213,6 +226,7 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
     id: 804,
@@ -227,9 +241,10 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
   {
-    id: 804,
+    id: 805,
     title: "ServerWatch Gold",
     image: "http://placekitten.com/g/200/300",
     description: ` Server Watch GOld description here.`,
@@ -241,11 +256,16 @@ const product = [
     updatedBy: "KEVIN L",
     tax: "Taxes not included",
     shipping: "Shipping not included",
+    InventoryItem: true,
   },
 ];
 
 const seed = () => {
-  db.Admin.bulkCreate(admin).then(() => db.Product.bulkCreate(product));
+  db.Admin.bulkCreate(admin)
+    .then(() => db.Product.bulkCreate(product))
+    .catch((err) => {
+      console.error(err);
+    });
 };
 
 seed();

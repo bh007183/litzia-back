@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
 
     image: DataTypes.STRING,
 
-    customerDescription: {
+    description: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -24,11 +24,11 @@ module.exports = function (sequelize, DataTypes) {
     price: {
       type: DataTypes.INTEGER,
     },
-    cost: {
+    price: {
       type: DataTypes.INTEGER,
     },
 
-    QuantityInStock: {
+    quantity: {
       type: DataTypes.INTEGER,
     },
 
@@ -37,6 +37,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     featured: {
       type: DataTypes.BOOLEAN,
+      default: false,
     },
 
     updatedBy: {
