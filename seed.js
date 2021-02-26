@@ -6,11 +6,7 @@ const admin = [
     password: "yohanShmit11",
     email: "jeffry@gmail.com",
   },
-  {
-    username: "test",
-    password: "test",
-    email: "test@test.com",
-  },
+ 
 ];
 
 const product = [
