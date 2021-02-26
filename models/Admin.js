@@ -16,6 +16,12 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
         validate: { isEmail: true },
       },
+
+      phone: {
+        type: DataTypes.STRING,
+      },
+
+      admin: DataTypes.BOOLEAN
       
     });
     Admin.associate = function (models) {
