@@ -3,6 +3,8 @@ const app = express();
 const cors = require("cors");
 const db = require("./models");
 
+require("dotenv").config();
+
 var PORT = process.env.PORT || 3005;
 
 app.use(express.urlencoded({ extended: true }));
@@ -18,7 +20,7 @@ app.use(adminRoutes);
 app.use(productRoutes);
 app.use(customerRoutes);
 
-db.sequelize.sync({ force: true }).then(function () {
+db.sequelize.sync({ force: false }).then(function () {
   app.listen(PORT, function () {
     console.log("App listening on PORT http://localhost:" + PORT);
   });

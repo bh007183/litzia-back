@@ -1,55 +1,66 @@
-
-
 module.exports = function (sequelize, DataTypes) {
-    const Product = sequelize.define("Product", {
-      title: { 
-        type: DataTypes.STRING,
-         allowNull: false,
-         unique: true },
+  const Product = sequelize.define("Product", {
+<<<<<<< HEAD
+=======
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+    },
 
-      image: DataTypes.STRING,
+>>>>>>> 0a3b13b6cbc8b83e2f96329159303b29d2433a46
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
 
-      
-      customerDescription: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
+    image: DataTypes.STRING,
 
-      InventoryItem: {
-        type: DataTypes.BOOLEAN
-      },
+    customerDescription: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
 
-      category: {
-        type: DataTypes.STRING
-      },
+    InventoryItem: {
+      type: DataTypes.BOOLEAN,
+    },
 
-      price: {
-        type: DataTypes.INTEGER,
-      },
-      cost: {
-        type: DataTypes.INTEGER,
-      },
+    category: {
+      type: DataTypes.STRING,
+    },
 
-      QuantityInStock: {
-        type: DataTypes.INTEGER,
-      },
+    price: {
+      type: DataTypes.INTEGER,
+    },
+    cost: {
+      type: DataTypes.INTEGER,
+    },
 
-      tier: {
-        type: DataTypes.STRING
-      },
-      fetured: {
-        type: DataTypes.BOOLEAN
-      },
+    QuantityInStock: {
+      type: DataTypes.INTEGER,
+    },
 
-      updatedBy: {
-        type: DataTypes.STRING,
-      },
+    tier: {
+      type: DataTypes.STRING,
+    },
+    featured: {
+      type: DataTypes.BOOLEAN,
+    },
 
-      
-    });
-    Product.associate = function (models) {
-      Product.belongsTo(models.Admin)
-    }
-   return Product
-}
+    updatedBy: {
+      type: DataTypes.STRING,
+    },
+<<<<<<< HEAD
+=======
 
+    tax: { type: DataTypes.STRING },
+
+    shipping: { type: DataTypes.STRING },
+>>>>>>> 0a3b13b6cbc8b83e2f96329159303b29d2433a46
+  });
+  Product.associate = function (models) {
+    Product.belongsTo(models.Admin);
+  };
+  return Product;
+};
