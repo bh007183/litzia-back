@@ -34,7 +34,8 @@ router.post("/api/admin/login", async (req, res) => {
       }
       console.log("this is ", match);
       console.log(token)
-      res.json({token, guest: data.dataValues.admin });
+      res.json({token, guest: data.dataValues.admin});
+
       
     });
   } else {
