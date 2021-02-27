@@ -4,11 +4,15 @@ const axios = require("axios");
 const dotenv = require("dotenv")
 const jwt = require("jsonwebtoken")
 dotenv.config()
+
+
+
+
 //////Creates Product///////
 ///////////////////////////////////
 ///////////////PROTECT//////////////
 router.post("/api/product", async (req, res) => {
-  console.log(req.headers)
+  
   let token = false
 if(!req.headers){
   token = false
@@ -30,7 +34,19 @@ if(!token){
     }
   })
   if(varify){
-    const data = await db.Product.create(req.body).catch((err) => {
+    const data = await db.Product.create({
+      title: req.body.title,
+      image: req.body.image,
+      description: req.body.description,
+      category: req.body.category,
+      price: req.body.price,
+      quantity: req.body.quantity,
+      tier: req.body.tier,
+      featured: req.body.featured,
+      tax: req.body.tax,
+      shipping: req.body.shipping
+      
+       }).catch((err) => {
       res.status(500);
       console.error(err);
     });
