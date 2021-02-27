@@ -21,7 +21,7 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING,
       },
 
-      admin: DataTypes.BOOLEAN
+      admin: {type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false}
       
     });
     Admin.associate = function (models) {

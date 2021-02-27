@@ -28,13 +28,13 @@ router.post("/api/admin/login", async (req, res) => {
   if (match) {
       //////////need to set private key///////////////
       console.log(data.dataValues)
-    jwt.sign({email: data.dataValues.email, id: data.dataValues.id}, "privatekey", { expiresIn: "1h" }, (err, token) => {
+    jwt.sign({email: data.dataValues.email, id: data.dataValues.id, admin: data.dataValues.admin}, "privatekey", { expiresIn: "1h" }, (err, token) => {
       if (err) {
         console.log(err);
       }
       console.log("this is ", match);
       console.log(token)
-      res.json(token);
+      res.json({token, guest: data.dataValues.admin });
       
     });
   } else {
@@ -52,7 +52,7 @@ router.post("/api/admin", async (req, res) => {
     email: req.body.email,
     admin: req.body.admin
   }).catch((err) => {
-    return res.status(500).json("Try another username");
+    return res.status(500).json("Something went wrong!");
     
   });
   res.json(data).status(200).end();
