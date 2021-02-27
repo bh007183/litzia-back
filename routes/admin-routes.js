@@ -35,6 +35,7 @@ router.post("/api/admin/login", async (req, res) => {
       console.log("this is ", match);
       console.log(token)
       res.json({token, guest: data.dataValues.admin});
+
       
     });
   } else {
@@ -52,7 +53,7 @@ router.post("/api/admin", async (req, res) => {
     email: req.body.email,
     admin: req.body.admin
   }).catch((err) => {
-    return res.status(500).json("Try another username");
+    return res.status(500).json("Something went wrong!");
     
   });
   res.json(data).status(200).end();
