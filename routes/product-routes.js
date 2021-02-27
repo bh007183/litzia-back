@@ -105,7 +105,17 @@ router.get("/api/product", async (req, res) => {
   // }
   // )
 });
-
+router.get("/api/product/:id", async (req, res) => {
+  const data = await db.Product.findOne({
+    where:{
+      id: req.params.id
+    }
+  }).catch((err) => {
+    res.status(500);
+    console.error(err);
+  });
+  res.json(data);
+});
 
 
 ////////DELETE PRODUCTS//////////////
