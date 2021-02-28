@@ -20,7 +20,7 @@ app.use(adminRoutes);
 app.use(productRoutes);
 app.use(cartRoutes);
 
-db.sequelize.sync({ force: false }).then(function () {
+db.sequelize.sync({ force: false}).then(function () {
   app.listen(PORT, function () {
     console.log("App listening on PORT http://localhost:" + PORT);
   });
