@@ -7,15 +7,14 @@ const jwt = require("jsonwebtoken");
 //////Admin Login/////////
 
 router.post("/api/admin/login", async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
 
   const data = await db.Admin.findOne({
     where: {
       username: req.body.username,
     },
   }).catch((err) => {
-    res.status(500).send(err).end()
-    
+    res.status(500).send(err).end();
   });
   console.log("this is", data);
   if (data === null || !data) {
@@ -26,18 +25,25 @@ router.post("/api/admin/login", async (req, res) => {
     .compare(req.body.password, data.password)
     .catch((err) => res.status(403).json(err));
   if (match) {
-      //////////need to set private key///////////////
-      console.log(data.dataValues)
-    jwt.sign({email: data.dataValues.email, id: data.dataValues.id, admin: data.dataValues.admin}, "privatekey", { expiresIn: "1h" }, (err, token) => {
-      if (err) {
-        console.log(err);
+    //////////need to set private key///////////////
+    console.log(data.dataValues);
+    jwt.sign(
+      {
+        email: data.dataValues.email,
+        id: data.dataValues.id,
+        admin: data.dataValues.admin,
+      },
+      "privatekey",
+      { expiresIn: "1h" },
+      (err, token) => {
+        if (err) {
+          console.log(err);
+        }
+        console.log("this is ", match);
+        console.log(token);
+        res.json({ token, guest: data.dataValues.admin });
       }
-      console.log("this is ", match);
-      console.log(token)
-      res.json({token, guest: data.dataValues.admin});
-
-      
-    });
+    );
   } else {
     res.json("Password or Username did not match");
   }
@@ -51,10 +57,9 @@ router.post("/api/admin", async (req, res) => {
     username: req.body.username,
     password: hashedPassword,
     email: req.body.email,
-    admin: req.body.admin
+    admin: req.body.admin,
   }).catch((err) => {
     return res.status(500).json("Something went wrong!");
-    
   });
   res.json(data).status(200).end();
   console.log(data);
@@ -63,33 +68,30 @@ router.post("/api/admin", async (req, res) => {
 /////Delete Admin//////
 router.delete("/api/admin/delete", async (req, res) => {
   let token = false;
-  if(!req.headers){
-    token=false;
-  }else if(!req.headers.authorization){
+  if (!req.headers) {
     token = false;
+  } else if (!req.headers.authorization) {
+    token = false;
+  } else {
+    token = req.headers.authorization.split(" ")[1];
   }
-  else{
-    token = req.headers.authorization.split(" ")[1]
-  }
-  if(!token){
-    res.status(403).send("Please Login")
-  }
-  else{
-    let tokenMatch = jwt.verify(token, "privatekey", (err, verify)=>{
-      if(err){
-        return false
-      }else{
-        return verify
+  if (!token) {
+    res.status(403).send("Please Login");
+  } else {
+    let tokenMatch = jwt.verify(token, "privatekey", (err, verify) => {
+      if (err) {
+        return false;
+      } else {
+        return verify;
       }
-    })
-    if(tokenMatch){
-      res.send("authorized")
-      
-    }else{
-      res.status(403).send('auth fail')
+    });
+    if (tokenMatch) {
+      res.send("authorized");
+    } else {
+      res.status(403).send("auth fail");
     }
   }
-  
+
   const data = await db.Admin.findOne({
     where: {
       username: req.body.username,
@@ -146,4 +148,35 @@ router.put("/api/admin/:AdminId", async (req, res) => {
   }
 });
 
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<FUNCTIONS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+function setAdminId() {
+  app.get("/api/cart", (req, res) => {
+    let token = false;
+    if (!req.headers) {
+      token = false;
+    } else if (!req.headers.authorization) {
+      token = false;
+    } else {
+      token = req.headers.authorization.split("")[1];
+    }
+    if (!token) {
+      res.status(403).send("log in to see your cart");
+    } else {
+      const data = jwt.verify(token, "privatekey", (err, data) => {
+        if (err) {
+          return false;
+        } else {
+          return data;
+        }
+      });
+      if (data) {
+        AdminID = data.id;
+        res.send("authorized");
+      } else {
+        res.status(403).send("auth fail");
+      }
+    }
+  });
+}
 module.exports = router;
