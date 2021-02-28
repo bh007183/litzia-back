@@ -39,11 +39,13 @@ if(!token){
       title: req.body.title,
       image: req.body.image,
       description: req.body.description,
+      InventoryItem: req.body.InventoryItem,
       category: req.body.category,
       price: req.body.price,
       quantity: req.body.quantity,
       tier: req.body.tier,
       featured: req.body.featured,
+      updatedBy: req.body.updatedBy,
       tax: req.body.tax,
       shipping: req.body.shipping
       

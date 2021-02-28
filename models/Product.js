@@ -21,11 +21,6 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
     },
 
-    subCategory: { type: DataTypes.STRING },
-
-    price: {
-      type: DataTypes.INTEGER,
-    },
     price: {
       type: DataTypes.INTEGER,
     },

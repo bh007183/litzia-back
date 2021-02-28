@@ -4,6 +4,36 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 
+function setAdminId() {
+  router.get("/api/cart", (req, res) => {
+    let token = false;
+    if (!req.headers) {
+      token = false;
+    } else if (!req.headers.authorization) {
+      token = false;
+    } else {
+      token = req.headers.authorization.split(" ")[1];
+    }
+    if (!token) {
+      res.status(403).send("log in to see your cart");
+    } else {
+      const data = jwt.verify(token, "privatekey", (err, data) => {
+        if (err) {
+          return false;
+        } else {
+          return data;
+        }
+      });
+      if (data) {
+        console.log(data);
+        res.send("authorized");
+      } else {
+        res.status(403).send("auth fail");
+      }
+    }
+  });
+}
+
 router.post("/api/admin", async (req, res) => {
   const hashedPassword = await bcrypt.hashSync(req.body.password, saltRounds);
   const data = await db.Admin.create({
@@ -56,8 +86,27 @@ router.post("/api/admin/login", async (req, res) => {
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<POST TO SHOPPING CART >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 router.post("/api/cart", async (req, res) => {
-  const data = await db.Cart.create({
-    AdminId: setAdminId(),
+
+  if (!req.headers) {
+    token = false;
+  } else if (!req.headers.authorization) {
+    token = false;
+  } else {
+    token = req.headers.authorization.split(" ")[1];
+  }
+  if (!token) {
+    res.status(403).send("log in to see your cart");
+  } else {
+    const data = jwt.verify(token, "privatekey", (err, data) => {
+      if (err) {
+        return false;
+      } else {
+        return data;
+      }
+    });
+    if (data) {
+    const addtodatabase = await db.Cart.create({
+    AdminId: data.id,
     title: req.body.title,
     image: req.body.image,
     description: req.body.description,
@@ -66,8 +115,11 @@ router.post("/api/cart", async (req, res) => {
     console.error(err);
     res.status(500);
   });
-  res.json(data).status(200).end();
-  console.log(data);
+  res.json(addtodatabase).status(200).end(); 
+    } else {
+      res.status(403).send("auth fail");
+    }
+  }
 });
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<UPDATE TO SHOPPING CART>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -129,34 +181,6 @@ router.delete("/api/cart/:id", async (req, res) => {
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<FUNCTIONS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-function setAdminId() {
-  app.get("/api/cart", (req, res) => {
-    let token = false;
-    if (!req.headers) {
-      token = false;
-    } else if (!req.headers.authorization) {
-      token = false;
-    } else {
-      token = req.headers.authorization.split("")[1];
-    }
-    if (!token) {
-      res.status(403).send("log in to see your cart");
-    } else {
-      const data = jwt.verify(token, "privatekey", (err, data) => {
-        if (err) {
-          return false;
-        } else {
-          return data;
-        }
-      });
-      if (data) {
-        AdminID = data.id;
-        res.send("authorized");
-      } else {
-        res.status(403).send("auth fail");
-      }
-    }
-  });
-}
+
 
 module.exports = router;
