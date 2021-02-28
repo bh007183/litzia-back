@@ -6,7 +6,6 @@ const admin = [
     password: "yohanShmit11",
     email: "jeffry@gmail.com",
   },
- 
 ];
 
 const product = [
@@ -17,7 +16,48 @@ const product = [
     description: `
     Lenovo ThinkPad T530 15.6" LED Notebook with Intel Core i5 i5-3210M 2.5GHz and a 1366 x 768 HD Display preinstalled 4 GB RAM  and a  500 GB HDD and DVD-Writer included. Features Intel HD 4000 Graphics Card,Webcam and Genuine Windows 7 Professional. Estimated Battery life is 9.10 Hour Battery and uses DisplayPort for external connection`,
     category: "computer",
+    subCategory: "laptop",
     price: "450",
+    quantity: 50,
+    tier: "two",
+    featured: true,
+    updatedBy: "KEVIN L",
+    tax: "Taxes not included",
+    shipping: "Shipping not included",
+    InventoryItem: true,
+  },
+  {
+    id: 005,
+    title: `Dell Latitude 7480 14"`,
+    image: "src/utils/images/LenovoThinkPadT530.jpeg",
+    description: `14-inch Full HD Anti-Glare (1920x1080) 720p HD Webcam with Microphone
+    60Whr 4-Cell Battery up to 13 Hours with Express Charge, Windows 10 Pro 64-bit
+    Intel 7th Gen Core i7-7600U (4MB Cache, 2.80GHz up to 3.80GHz Turbo Boost)
+    Intel 8265 Dual-Band AC Wireless, Bluetooth 4.2, WiGig, USB-Type-C Display Port
+    Intel HD Graphics 620, 16GB-2133MHz DDR4 Memory, 256GB M.2 Solid State Drive`,
+    category: "computer",
+    subCategory: "laptop",
+    price: "600",
+    quantity: 50,
+    tier: "two",
+    featured: true,
+    updatedBy: "KEVIN L",
+    tax: "Taxes not included",
+    shipping: "Shipping not included",
+    InventoryItem: true,
+  },
+  {
+    id: 006,
+    title: `ASUS Laptop L410 Ultra Thin 14"`,
+    image: "src/utils/images/LenovoThinkPadT530.jpeg",
+    description: `Efficient Intel Celeron N4020 Processor (4M Cache, up to 2.8 GHz)
+    14” Full HD (1920x1080) Display
+    64GB eMMC Flash Storage and 4GB DDR4 RAM
+    Windows 10 in S mode with One Year Microsoft 365 Personal included
+    Slim and Portable: 0.72” thin and weighs only 2.87 lbs (battery included)`,
+    category: "computer",
+    subCategory: "laptop",
+    price: "300",
     quantity: 50,
     tier: "two",
     featured: true,
@@ -33,6 +73,7 @@ const product = [
     description: `
     Lenovo ThinkCentre M72e Desktop Computer with Intel Core i3 i3-3220 3.3GHz with a Small Form Factor and preinstalled 4 GB RAM and a 500 GB HDD and DVD-Writer. Features Intel HD 2500 Graphics Card and Genuine Windows 7 Professional uses DVI and comes with a 3-Year Warranty *monitor NOT INCLUDED`,
     category: "computer",
+    subCategory: "desktop",
     price: "450",
     quantity: 50,
     tier: "two",
@@ -48,6 +89,7 @@ const product = [
     image: "src/utils/images/workstation.jpg",
     description: `Network Certified Workstation Intel 1.8 GHZ Pentium 4 Processor with 512k cache High Speed Motherboard 400/533mhz bus 32 Bit PCI Bus Mastering Architecture Intel ChipSet Shared AGP Videot / 4 USB 2.0 Ports 1 Mouse / 1 Parallel / 2 Serial Ports 10/100 Ethernet LAN Adapter Audio/Sound Adapter 1200 Megabytes of High Speed DDR SDRAM Memory 300 Watt Power Supply 40 Gigabyte Hard Drive Ultra Enhanced IDE Interface 9.5 Millisecond Access Time CD-ROM Player Internal 52x Speed Enhanced IDE Interface 1.44 Megabyte Floppy Drive 3.5" 104 Key Windows Enhanced Keyboard Optical Three Button Mouse with Scroll Wheel - PS2/USB Windows XP Professional with CD`,
     category: "computer",
+    subCategory: "desktop",
     price: "250",
     quantity: 50,
     tier: "two",
@@ -63,6 +105,7 @@ const product = [
     image: "src/utils/images/PowerEdgeT410.jpg",
     description: `Dell PowerEdge T410 tower server with Intel Xeon E-2224G 3.5GHz Processor included tower case with 8GB RAM and a 1TB HDD and an optical drive. OS not installed`,
     category: "computer",
+    subCategory: "server",
     price: "250",
     quantity: 50,
     tier: "two",
@@ -78,6 +121,7 @@ const product = [
     image: "src/utils/images/workstation.jpg",
     description: `Dell PowerEdge T40 tower server with Intel Xeon x4340 2.4GHz Processor included tower case with 16GB RAM and 2 Dell 146GB SAS Drives, SAS 6i Raid Controller,OS not installed`,
     category: "computer",
+    subCategory: "server",
     price: "250",
     quantity: 50,
     tier: "two",
@@ -94,6 +138,7 @@ const product = [
     description: `Lenovo ThinkServer RD630 Rack Server w/ (2) Intel Xeon E5-2620 6 Core Processors for 12 cores total, 48GB RAM, 3 GB Usable disk Space with (6) 1TB 7.2K 6Gbps SCSI 3.5" Hot Plug Hard Drives for RAID 10, Raid 700 adaptor; 800W Dual Hot-Plug Redundant Power Supply; QuadPort Network Adaptor; Premium Management adaptor; 5-Yr Hardware Warranty NBD Onsite Hardware Repair Service
     `,
     category: "computer",
+    subCategory: "server",
     price: "250",
     quantity: 50,
     tier: "two",
@@ -109,6 +154,7 @@ const product = [
     image: "http://placekitten.com/g/200/300",
     description: ` Xerox PrimeLink with color MFP and support for 330 x 660mm banner printing. Reliable service you come to know with xerox.`,
     category: "xerox",
+    subCategory: "color",
     price: 100.0,
     quantity: 2000,
     tier: "one",
@@ -123,7 +169,8 @@ const product = [
     title: "Xerox WorkCentre 5300",
     image: "http://placekitten.com/g/200/300",
     description: ` Black and white copier only or MFP with support for tabloid/A3. Copy, print, scan, fax, email on a small foot print - integrated office finisher saves space without losing features and functionality. Reliable service you come to know with Xerox.`,
-    category: "hardware",
+    category: "xerox",
+    subCategory: "station",
     price: 100.0,
     quantity: 2000,
     tier: "one",
@@ -139,6 +186,7 @@ const product = [
     image: "http://placekitten.com/g/200/300",
     description: ` Black and White MFP with support for Letter/Legal. Copy, print, scan, fax, email on a small foot print - Built-in Wi-Fi, Compact foot print. 3.5" capacitive color touch screen user interface, and fast printing with crisp, clear text & graphics and the full array of mobile platforms. All with the Reliable service you come to know with Xerox.`,
     category: "xerox",
+    subCategory: "printer",
     price: 100.0,
     quantity: 2000,
     tier: "one",
@@ -155,6 +203,7 @@ const product = [
     description: ` Work from anywhere on all your devices with all your familiar Microsoft 365 applications, backed by Dell’s Cloud Concierge Service.
     License Validation Period 1 year.`,
     category: "software",
+    subCategory: "microsoft",
     price: 100.0,
     quantity: 2000,
     tier: "one",
@@ -170,6 +219,7 @@ const product = [
     image: "http://placekitten.com/g/200/300",
     description: ` Managed Offsite Back-Up description here .`,
     category: "security",
+    subCategory: "offsite",
     price: 100.0,
     quantity: 2000,
     tier: "one",
@@ -185,6 +235,7 @@ const product = [
     image: "http://placekitten.com/g/200/300",
     description: `Software security description here.`,
     category: "security",
+    subCategory: "unique",
     price: 100.0,
     quantity: 2000,
     tier: "one",
@@ -200,6 +251,7 @@ const product = [
     image: "http://placekitten.com/g/200/300",
     description: ` Litzia Hosted Exchange description here.`,
     category: "Service",
+    subCategory: "unique",
     price: 100.0,
     quantity: 2000,
     tier: "one",
@@ -215,6 +267,7 @@ const product = [
     image: "http://placekitten.com/g/200/300",
     description: ` Litzia Hosted Exchange description here.`,
     category: "Service",
+    subCategory: "unique",
     price: 100.0,
     quantity: 2000,
     tier: "one",
@@ -230,6 +283,7 @@ const product = [
     image: "http://placekitten.com/g/200/300",
     description: ` Litzia Hosted Exchange description here.`,
     category: "Service",
+    subCategory: "unique",
     price: 100.0,
     quantity: 2000,
     tier: "one",
@@ -245,6 +299,7 @@ const product = [
     image: "http://placekitten.com/g/200/300",
     description: ` Server Watch GOld description here.`,
     category: "Service",
+    subCategory: "unique",
     price: 100.0,
     quantity: 2000,
     tier: "one",

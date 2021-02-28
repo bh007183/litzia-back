@@ -14,13 +14,13 @@ app.use(cors());
 
 const adminRoutes = require("./routes/admin-routes");
 const productRoutes = require("./routes/product-routes");
-
+const cartRoutes = require("./routes/cart-routes");
 
 app.use(adminRoutes);
 app.use(productRoutes);
+app.use(cartRoutes);
 
-
-db.sequelize.sync({ force: false}).then(function () {
+db.sequelize.sync({ force: false }).then(function () {
   app.listen(PORT, function () {
     console.log("App listening on PORT http://localhost:" + PORT);
   });
