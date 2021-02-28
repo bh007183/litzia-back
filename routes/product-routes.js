@@ -41,6 +41,7 @@ if(!token){
       description: req.body.description,
       InventoryItem: req.body.InventoryItem,
       category: req.body.category,
+      subCategory: req.body.subCategory,
       price: req.body.price,
       quantity: req.body.quantity,
       tier: req.body.tier,
