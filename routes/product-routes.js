@@ -4,7 +4,8 @@ const axios = require("axios");
 const dotenv = require("dotenv")
 const jwt = require("jsonwebtoken")
 dotenv.config()
-
+const Sequelize = require('sequelize');
+const op = Sequelize.Op;
 
 
 
@@ -130,6 +131,24 @@ router.get("/api/product/:id", async (req, res) => {
     res.status(500);
     console.error(err);
   });
+  res.json(data);
+});
+
+
+
+
+router.get("/api/product/search/:title", async (req, res) => {
+  console.log(req.params.title)
+  const data = await db.Product.findAll({
+    where:{
+      title: {
+        [op.like]: "%" + req.params.title + "%"
+    }
+  }}).catch((err) => {
+    res.status(500);
+    console.error(err);
+  });
+  console.log(data)
   res.json(data);
 });
 
