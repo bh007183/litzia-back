@@ -145,25 +145,44 @@ router.put("/api/cart/:id", async (req, res) => {
 });
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<< Get Route>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-router.get("/api/cart/:id", async (req, res) => {
-  const data = await db.Cart.findOne({
-    where: {
-      id: req.body.id,
-    },
-    cart: {
-      id: req.body.id,
-      title: req.body.title,
-      description: req.body.description,
-      image: req.body.image,
-      price: req.body.price,
-    },
-  }).catch((err) => {
-    console.error(err);
-    res.status(500);
-  });
-  res.json(data).status(200).end();
-  console.log(data);
-});
+router.post("/api/cart/items", async (req, res) => {
+  console.log(req.body.headers)
+  let token = false;
+    if (!req.body.headers) {
+      token = false;
+    } else if (!req.body.headers.authorization) {
+      token = false;
+    } else {
+      token = req.body.headers.authorization.split(" ")[1];
+    }
+    if (!token) {
+      res.status(403).send("log in to see your cart");
+    } else {
+      const data = jwt.verify(token, "privatekey", (err, data) => {
+        if (err) {
+          return false;
+        } else {
+          return data;
+        }
+      });
+      if (data) {
+        const resData= await db.Cart.findAll({
+          where: {
+            AdminId: data.id,
+          },
+          
+        }).catch((err) => {
+          console.error(err);
+          res.status(500);
+        });
+        res.json(resData).status(200).end();
+        console.log(resData);
+      
+      } else {
+        res.status(403).send("auth fail");
+      }
+    }
+})
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DELETE ROUTE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 router.delete("/api/cart/:id", async (req, res) => {
