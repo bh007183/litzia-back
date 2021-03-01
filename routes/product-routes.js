@@ -125,10 +125,16 @@ router.get("/api/product", async (req, res) => {
   // }
   // )
 });
-router.get("/api/product/:id", async (req, res) => {
+
+
+
+
+
+////////////API GET ONE EXACT MATCH/////////////////
+router.get("/api/product/:title", async (req, res) => {
   const data = await db.Product.findOne({
     where:{
-      id: req.params.id
+      title: req.params.title
     }
   }).catch((err) => {
     res.status(500);
@@ -140,6 +146,7 @@ router.get("/api/product/:id", async (req, res) => {
 
 
 
+/////////////API GET ALL CONTAINS SEARCH////////////////
 router.get("/api/product/search/:title", async (req, res) => {
   console.log(req.params.title)
   const data = await db.Product.findAll({
