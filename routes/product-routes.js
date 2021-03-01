@@ -114,16 +114,21 @@ router.get("/api/product", async (req, res) => {
   });
   res.json(data);
 
-  // axios
-  // .get(
-  // "https://api-na.myconnectwise.net/v4_6_release/apis/3.0/procurement/catalog/?pageSize=100",
-  // {
-  //   headers: {
-  //     Authorization: process.env.Key_one,
-  //     clientId: process.env.Key_two,
-  //   },
-  // }
-  // )
+
+});
+
+router.get("/api/product/featured", async (req, res) => {
+  const data = await db.Product.findAll({
+    where: {
+      featured: 1
+    }
+  }).catch((err) => {
+    res.status(500);
+    console.error(err);
+  });
+  res.json(data);
+
+
 });
 router.get("/api/product/:id", async (req, res) => {
   const data = await db.Product.findOne({
