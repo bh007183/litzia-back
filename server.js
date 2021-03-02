@@ -18,13 +18,17 @@ app.use(cors(corsOptions));
 
 const adminRoutes = require("./routes/admin-routes");
 const productRoutes = require("./routes/product-routes");
+
+
 const cartRoutes = require("./routes/cart-routes");
 const nodemailer = require("./routes/nodemailer");
 
 
 app.use(adminRoutes);
 app.use(productRoutes);
+
 app.use(cartRoutes);
+
 app.use(nodemailer);
 
 db.sequelize.sync({ force: false }).then(function () {
