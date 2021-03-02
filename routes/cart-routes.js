@@ -3,36 +3,38 @@ const db = require("../models");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv")
+dotenv.config()
 
-function setAdminId() {
-  router.get("/api/cart", (req, res) => {
-    let token = false;
-    if (!req.headers) {
-      token = false;
-    } else if (!req.headers.authorization) {
-      token = false;
-    } else {
-      token = req.headers.authorization.split(" ")[1];
-    }
-    if (!token) {
-      res.status(403).send("log in to see your cart");
-    } else {
-      const data = jwt.verify(token, "privatekey", (err, data) => {
-        if (err) {
-          return false;
-        } else {
-          return data;
-        }
-      });
-      if (data) {
-        console.log(data);
-        res.send("authorized");
-      } else {
-        res.status(403).send("auth fail");
-      }
-    }
-  });
-}
+// function setAdminId() {
+//   router.get("/api/cart", (req, res) => {
+//     let token = false;
+//     if (!req.headers) {
+//       token = false;
+//     } else if (!req.headers.authorization) {
+//       token = false;
+//     } else {
+//       token = req.headers.authorization.split(" ")[1];
+//     }
+//     if (!token) {
+//       res.status(403).send("log in to see your cart");
+//     } else {
+//       const data = jwt.verify(token, "privatekey", (err, data) => {
+//         if (err) {
+//           return false;
+//         } else {
+//           return data;
+//         }
+//       });
+//       if (data) {
+//         console.log(data);
+//         res.send("authorized");
+//       } else {
+//         res.status(403).send("auth fail");
+//       }
+//     }
+//   });
+// }
 
 router.post("/api/admin", async (req, res) => {
   const hashedPassword = await bcrypt.hashSync(req.body.password, saltRounds);
@@ -97,7 +99,7 @@ router.post("/api/cart", async (req, res) => {
   if (!token) {
     res.status(403).send("log in to see your cart");
   } else {
-    const data = jwt.verify(token, "privatekey", (err, data) => {
+    const data = jwt.verify(token, process.env.JSON_TOKIO, (err, data) => {
       if (err) {
         return false;
       } else {
@@ -158,7 +160,7 @@ router.post("/api/cart/items", async (req, res) => {
     if (!token) {
       res.status(403).send("log in to see your cart");
     } else {
-      const data = jwt.verify(token, "privatekey", (err, data) => {
+      const data = jwt.verify(token, process.env.JSON_TOKIO, (err, data) => {
         if (err) {
           return false;
         } else {
@@ -185,10 +187,11 @@ router.post("/api/cart/items", async (req, res) => {
 })
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DELETE ROUTE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-router.delete("/api/cart/:id", async (req, res) => {
-  const data = await db.Cart.delete({
+router.delete("/api/cart/items/:id", async (req, res) => {
+  console.log(req.params.id)
+  const data = await db.Cart.destroy({
     where: {
-      id: req.body.id,
+      id: req.params.id,
     },
   }).catch((err) => {
     console.error(err);
