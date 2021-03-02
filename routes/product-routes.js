@@ -152,7 +152,7 @@ router.get("/api/product/:title", async (req, res) => {
 
 
 router.get("/api/product/singleItemPage/:id", async (req, res) => {
-  consol.log(req.body)
+  console.log(req.params.id)
   const data = await db.Product.findOne({
     
     where:{
@@ -271,6 +271,8 @@ router.get("/api/product/:category", async (req, res) => {
   });
   res.json(data);
 });
+
+
 
 ////////Returns Fetured Products/////////
 router.get("/api/product/:featured", async (req, res) => {

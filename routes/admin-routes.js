@@ -37,7 +37,7 @@ router.post("/api/admin/login", async (req, res) => {
         id: data.dataValues.id,
         admin: data.dataValues.admin,
       },
-      "privatekey",
+      process.env.JSON_TOKIO,
       { expiresIn: "1h" },
       (err, token) => {
         if (err) {
@@ -56,6 +56,7 @@ router.post("/api/admin/login", async (req, res) => {
 //////Create Admin/////
 
 router.post("/api/admin", async (req, res) => {
+  console.log(req.body)
   const hashedPassword = await bcrypt.hashSync(req.body.password, saltRounds);
   const data = await db.Admin.create({
     username: req.body.username,
