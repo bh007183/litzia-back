@@ -88,6 +88,7 @@ router.post("/api/admin/login", async (req, res) => {
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<POST TO SHOPPING CART >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 router.post("/api/cart", async (req, res) => {
+  console.log(req.headers.authorization)
 
   if (!req.headers) {
     token = false;
@@ -97,7 +98,7 @@ router.post("/api/cart", async (req, res) => {
     token = req.headers.authorization.split(" ")[1];
   }
   if (!token) {
-    res.status(403).send("log in to see your cart");
+    res.status(401).json("log in to see your cart");
   } else {
     const data = jwt.verify(token, process.env.JSON_TOKIO, (err, data) => {
       if (err) {
@@ -119,7 +120,7 @@ router.post("/api/cart", async (req, res) => {
   });
   res.json(addtodatabase).status(200).end(); 
     } else {
-      res.status(403).send("auth fail");
+      res.status(401).json("auth fail");
     }
   }
 });
