@@ -1,8 +1,12 @@
 const router = require("express").Router();
 const db = require("../models");
+
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv")
+dotenv.config()
+//////////////
 
 //////Admin Login/////////
 
@@ -78,7 +82,7 @@ router.delete("/api/admin/delete", async (req, res) => {
   if (!token) {
     res.status(403).send("Please Login");
   } else {
-    let tokenMatch = jwt.verify(token, "privatekey", (err, verify) => {
+    let tokenMatch = jwt.verify(token, process.env.JSON_TOKIO, (err, verify) => {
       if (err) {
         return false;
       } else {
@@ -163,7 +167,7 @@ function setAdminId() {
     if (!token) {
       res.status(403).send("log in to see your cart");
     } else {
-      const data = jwt.verify(token, "privatekey", (err, data) => {
+      const data = jwt.verify(token, process.env.JSON_TOKIO, (err, data) => {
         if (err) {
           return false;
         } else {

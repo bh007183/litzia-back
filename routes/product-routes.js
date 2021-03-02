@@ -2,6 +2,7 @@ const router = require("express").Router();
 const db = require("../models");
 const axios = require("axios");
 const dotenv = require("dotenv")
+
 const jwt = require("jsonwebtoken")
 dotenv.config()
 const Sequelize = require('sequelize');
@@ -27,14 +28,14 @@ if(!req.headers){
 if(!token){
   res.status(403).send("Please Login")
 }else {
-  const varify = jwt.verify(token, "privatekey", (err,data)=>{
+  const varify = jwt.verify(token, process.env.JSON_TOKIO, (err,data)=>{
     if(err){
       return false
     }else {
       return data
     }
   })
-  if(varify){
+  if(varify.admin === true){
     const data = await db.Product.create({
       title: req.body.title,
       image: req.body.image,
@@ -72,24 +73,24 @@ router.put("/api/product/update", async (req, res) => {
   let token = false
 if(!req.headers){
   token = false
-}else if (!req.headers.authentication){
+}else if (!req.headers.authorization){
   token = false
 }else{
-  token = req.headers.authentication.split(" ")[1]
+  token = req.headers.authorization.split(" ")[1]
   console.log(token)
 }
 
 if(!token){
   res.status(403).send("Please Login")
 }else {
-  const varify = jwt.verify(token, "privatekey", (err,data)=>{
+  const varify = jwt.verify(token, process.env.JSON_TOKIO, (err,data)=>{
     if(err){
       return false
     }else {
       return data
     }
   })
-  if(varify){
+  if(varify.admin === true){
     const data = await db.Product.update(req.body, {
       where: {
         id: req.body.id
@@ -108,6 +109,7 @@ if(!token){
 
 //////Returns  all Products ///////
 router.get("/api/product", async (req, res) => {
+  console.log(req)
   const data = await db.Product.findAll().catch((err) => {
     res.status(500);
     console.error(err);
@@ -130,10 +132,16 @@ router.get("/api/product/featured", async (req, res) => {
 
 
 });
-router.get("/api/product/:id", async (req, res) => {
+
+
+
+
+
+////////////API GET ONE EXACT MATCH/////////////////
+router.get("/api/product/:title", async (req, res) => {
   const data = await db.Product.findOne({
     where:{
-      id: req.params.id
+      title: req.params.title
     }
   }).catch((err) => {
     res.status(500);
@@ -143,8 +151,25 @@ router.get("/api/product/:id", async (req, res) => {
 });
 
 
+router.get("/api/product/singleItemPage/:id", async (req, res) => {
+  consol.log(req.body)
+  const data = await db.Product.findOne({
+    
+    where:{
+      id: req.params.id
+    }
+  }).catch((err) => {
+    res.status(500);
+    console.error(err);
+  });
+  
+  res.json(data);
+});
 
 
+
+
+/////////////API GET ALL CONTAINS SEARCH////////////////
 router.get("/api/product/search/:title", async (req, res) => {
   console.log(req.params.title)
   const data = await db.Product.findAll({
@@ -160,7 +185,7 @@ router.get("/api/product/search/:title", async (req, res) => {
   res.json(data);
 });
 
-
+/////////Admin Protected/////////////
 ////////DELETE PRODUCTS//////////////
 router.delete("/api/product/delete", async (req, res) => {
   console.log(req.headers)
@@ -176,14 +201,14 @@ if(!req.headers){
 if(!token){
   res.status(403).send("Please Login")
 }else {
-  const varify = jwt.verify(token, "privatekey", (err,data)=>{
+  const varify = jwt.verify(token, process.env.JSON_TOKIO, (err,data)=>{
     if(err){
       return false
     }else {
       return data
     }
   })
-  if(varify){
+  if(varify.admin === true){
     const data = await db.Product.destroy({
       where: {
         id: req.body.id
