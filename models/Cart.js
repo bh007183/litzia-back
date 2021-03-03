@@ -14,9 +14,15 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
     },
 
+    quantity: { type: DataTypes.INTEGER, defaultValue: 1 },
+
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+
+    totalCost: {
+      type: DataTypes.INTEGER,
     },
   });
   Cart.associate = function (models) {

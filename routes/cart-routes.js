@@ -3,8 +3,8 @@ const db = require("../models");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv")
-dotenv.config()
+const dotenv = require("dotenv");
+dotenv.config();
 
 // function setAdminId() {
 //   router.get("/api/cart", (req, res) => {
@@ -88,7 +88,7 @@ router.post("/api/admin/login", async (req, res) => {
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<POST TO SHOPPING CART >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 router.post("/api/cart", async (req, res) => {
-  console.log(req.headers.authorization)
+  console.log(req.headers.authorization);
 
   if (!req.headers) {
     token = false;
@@ -108,17 +108,17 @@ router.post("/api/cart", async (req, res) => {
       }
     });
     if (data) {
-    const addtodatabase = await db.Cart.create({
-    AdminId: data.id,
-    title: req.body.title,
-    image: req.body.image,
-    description: req.body.description,
-    price: req.body.price,
-  }).catch((err) => {
-    console.error(err);
-    res.status(500);
-  });
-  // res.json(addtodatabase).status(200).end(); 
+      const addtodatabase = await db.Cart.create({
+        AdminId: data.id,
+        title: req.body.title,
+        image: req.body.image,
+        description: req.body.description,
+        price: req.body.price,
+      }).catch((err) => {
+        console.error(err);
+        res.status(500);
+      });
+      res.json(addtodatabase).status(200).end();
     } else {
       res.status(401).json("auth fail");
     }
@@ -126,70 +126,62 @@ router.post("/api/cart", async (req, res) => {
 });
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<UPDATE TO SHOPPING CART>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-router.put("/api/cart/:id", async (req, res) => {
-  const data = await db.Cart.update({
-    where: {
-      id: req.body.id,
-    },
-
-    cart: {
-      id: req.body.id,
-      title: req.body.title,
-      description: req.body.description,
-      image: req.body.image,
-      price: req.body.price,
-    },
-  }).catch((err) => {
-    console.error(err);
-    res.status(500);
-  });
-  res.json(data).status(200).end();
-  console.log(data);
+router.put("/api/cart/", async (req, res) => {
+  console.log(req.body.id);
+  for (let i = 0; i < req.body.length; i++) {
+    console.log(req.body[i]);
+    const data = await db.Cart.update(req.body[i], {
+      where: { id: req.body[i].id },
+    }).catch((err) => {
+      console.error(err);
+      res.status(500);
+    });
+    console.log(data);
+  }
+  res.json("hello").status(200).end();
 });
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<< Get Route>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 router.post("/api/cart/items", async (req, res) => {
-  console.log(req.body.headers)
+  console.log(req.body.headers);
   let token = false;
-    if (!req.body.headers) {
-      token = false;
-    } else if (!req.body.headers.authorization) {
-      token = false;
-    } else {
-      token = req.body.headers.authorization.split(" ")[1];
-    }
-    if (!token) {
-      res.status(403).send("log in to see your cart");
-    } else {
-      const data = jwt.verify(token, process.env.JSON_TOKIO, (err, data) => {
-        if (err) {
-          return false;
-        } else {
-          return data;
-        }
-      });
-      if (data) {
-        const resData= await db.Cart.findAll({
-          where: {
-            AdminId: data.id,
-          },
-          
-        }).catch((err) => {
-          console.error(err);
-          res.status(500);
-        });
-        res.json(resData).status(200).end();
-        console.log(resData);
-      
+  if (!req.body.headers) {
+    token = false;
+  } else if (!req.body.headers.authorization) {
+    token = false;
+  } else {
+    token = req.body.headers.authorization.split(" ")[1];
+  }
+  if (!token) {
+    res.status(403).send("log in to see your cart");
+  } else {
+    const data = jwt.verify(token, process.env.JSON_TOKIO, (err, data) => {
+      if (err) {
+        return false;
       } else {
-        res.status(403).send("auth fail");
+        return data;
       }
+    });
+    if (data) {
+      const resData = await db.Cart.findAll({
+        where: {
+          AdminId: data.id,
+        },
+      }).catch((err) => {
+        console.error(err);
+        res.status(500);
+      });
+      res.json(resData).status(200).end();
+      console.log(resData);
+    } else {
+      res.status(403).send("auth fail");
     }
-})
+  }
+});
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<DELETE ROUTE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 router.delete("/api/cart/items/:id", async (req, res) => {
-  console.log(req.params.id)
+  console.log(req.params.id);
   const data = await db.Cart.destroy({
     where: {
       id: req.params.id,
@@ -203,7 +195,5 @@ router.delete("/api/cart/items/:id", async (req, res) => {
 });
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<FUNCTIONS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
 
 module.exports = router;
