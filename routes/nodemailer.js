@@ -3,7 +3,8 @@ const nodemailer = require("nodemailer");
 const router = require("express").Router();
 
 router.post("/nodemailer", async (req, res) => {
-
+   let reciept = req.body.order.map(item => item.title + " " + item.price + " ----- ")
+  
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -18,14 +19,14 @@ router.post("/nodemailer", async (req, res) => {
     to: "thisisarandomtest123@gmail.com", // list of receivers. FOR LITZIA EMPLOYEES
     subject: "Hello friend✔", // Subject line
     text: "", // plain text body
-    html: `${req.body.firstName} ${req.body.lastName} has placed an order`, // html body
+    html: `${req.body.firstName}  ${req.body.lastName} has placed an order. ${req.body.address}, ${req.body.apartment}, ${req.body.city}, ${req.body.zipcode}, ${req.body.state}, ==================${req.body.email}, ${req.body.phoneNumber}, ${req.body.address}, ===========================${reciept}`, // html body
   });
   let customer = await transporter.sendMail({
     from: req.body.emailAddress, // sender address
     to: req.body.email, // list of receivers
     subject: "Hello friend✔", // Subject line
     text: "", // plain text body
-    html: `${req.body.firstName} , thank you for your order! Here is a receipt of your order. ${JSON.stringify(req.body.order)} Please feel free to contact a Litzia representative if there are any questions or concerns.`, // html body
+    html: `${req.body.firstName} , thank you for your order! Here is a summery of your order. ${reciept.toString()} Please feel free to contact a Litzia representative if there are any questions or concerns.`, // html body
   });
   console.log(req.body.emailAddress);
   console.log("Message sent: %s", );
