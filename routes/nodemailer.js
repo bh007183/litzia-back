@@ -10,25 +10,30 @@ router.post("/nodemailer", async (req, res) => {
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
-      user: "monkeyboi330", // generated ethereal user
-      pass: "0FB3DACB60", // generated ethereal password
+      user: "thisisarandomtest123", // generated ethereal user
+      pass: "testingpassword1", // generated ethereal password
     },
   });
-  let info = await transporter.sendMail({
+  let litzia = await transporter.sendMail({
     from: req.body.emailAddress, // sender address
-    to: "khsiehdumps@gmail.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text:
-      "ahfkjahfkjashfkhiuaeiufhqifhaiuvhaiuvhaihvaiuhvjkadhvkjalshkjlvkjbnvkjadsnbvkjasbvkjavb ka vkl kl", // plain text body
-    html:
-      "Dear Ben, I dont know exactly why this is working. But here is an email for you my dear friend.", // html body
+    to: "thisisarandomtest123@gmail.com", // list of receivers. FOR LITZIA EMPLOYEES
+    subject: "Hello friend✔", // Subject line
+    text: "", // plain text body
+    html: `${req.body.firstName} ${req.body.lastName} has placed an order`, // html body
+  });
+  let customer = await transporter.sendMail({
+    from: req.body.emailAddress, // sender address
+    to: req.body.email, // list of receivers
+    subject: "Hello friend✔", // Subject line
+    text: "", // plain text body
+    html: `${req.body.firstName} , thank you for your order! Here is a receipt of your order. Please feel free to contact a Litzia representative if there are any questions or concerns.`, // html body
   });
   console.log(req.body.emailAddress);
   console.log("Message sent: %s", info.messageId);
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
   // Preview only available when sending through an Ethereal account
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(customer));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 });
 
