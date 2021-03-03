@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 var corsOptions = {
-  origin: 'https://litzia-front.herokuapp.com/'
+  origin: 'https://litzia-b.herokuapp.com/'
 }
 // corsOptions
 app.use(cors(corsOptions));
