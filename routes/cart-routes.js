@@ -118,7 +118,7 @@ router.post("/api/cart", async (req, res) => {
     console.error(err);
     res.status(500);
   });
-  res.json(addtodatabase).status(200).end(); 
+  // res.json(addtodatabase).status(200).end(); 
     } else {
       res.status(401).json("auth fail");
     }

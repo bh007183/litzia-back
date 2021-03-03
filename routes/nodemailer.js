@@ -3,7 +3,6 @@ const nodemailer = require("nodemailer");
 const router = require("express").Router();
 
 router.post("/nodemailer", async (req, res) => {
-  console.log(req);
 
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -26,10 +25,10 @@ router.post("/nodemailer", async (req, res) => {
     to: req.body.email, // list of receivers
     subject: "Hello friend✔", // Subject line
     text: "", // plain text body
-    html: `${req.body.firstName} , thank you for your order! Here is a receipt of your order. Please feel free to contact a Litzia representative if there are any questions or concerns.`, // html body
+    html: `${req.body.firstName} , thank you for your order! Here is a receipt of your order. ${JSON.stringify(req.body.order)} Please feel free to contact a Litzia representative if there are any questions or concerns.`, // html body
   });
   console.log(req.body.emailAddress);
-  console.log("Message sent: %s", info.messageId);
+  console.log("Message sent: %s", );
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
   // Preview only available when sending through an Ethereal account

@@ -2,9 +2,18 @@ const db = require("./models");
 
 const admin = [
   {
-    username: "FluffyWalrus",
-    password: "yohanShmit11",
-    email: "jeffry@gmail.com",
+    
+    username: "Customer",
+    password: "$2b$10$Sf6Q6/yiWZWPFwAVCubzgetciKBwaTMU/Y4QdTfMqy8gsQMMWF2o2",
+    email: "Customer@gmail.com",
+    admin: false
+  },
+  {
+    
+    username: "Admin",
+    password: "$2b$10$0usmRNv2WAnuybFG0akrIO4q5tQOpUEQt0yqstYt/9c99./Sxr8nK",
+    email: "Admin@gmail.com",
+    admin: true
   },
 ];
 
@@ -333,4 +342,6 @@ const seed = () => {
     });
 };
 
+module.exports = admin
+module.exports = product
 seed();

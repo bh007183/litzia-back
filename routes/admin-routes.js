@@ -6,6 +6,8 @@ const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv")
 dotenv.config()
+const admin = require("../seed")
+const product = require("../seed")
 //////////////
 
 //////Admin Login/////////
@@ -184,4 +186,19 @@ function setAdminId() {
     }
   });
 }
+
+
+
+router.post("/api/admin/seed", async (req, res) => {
+  
+  const product = await db.Admin.bulkCreate([admin[0], admin[1]]).then(res =>
+    console.log(res)
+  ).catch(err => console.log(err))
+  console.log(product)
+  const productData = await db.Product.bulkCreate(product).catch(err => console.log(err))
+  console.log(productData)
+  
+  
+});
+
 module.exports = router;
