@@ -10,11 +10,11 @@ var PORT = process.env.PORT || 3005;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// var corsOptions = {
-//   origin: 'https://litzia-front.herokuapp.com/'
-// }
-// corsOptions
-app.use(cors());
+var corsOptions = {
+  origin: 'https://litzia-front.herokuapp.com/'
+}
+
+app.use(cors(corsOptions));
 
 const adminRoutes = require("./routes/admin-routes");
 const productRoutes = require("./routes/product-routes");
