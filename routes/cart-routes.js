@@ -71,7 +71,7 @@ router.post("/api/admin/login", async (req, res) => {
     console.log(data.dataValues);
     const token = jwt.sign(
       { email: data.dataValues.email, id: data.dataValues.id },
-      "privatekey",
+      process.env.JSON_TOKIO,
       { expiresIn: "1h" },
       (err, token) => {
         if (err) {
