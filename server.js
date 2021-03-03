@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 var corsOptions = {
-  origin: 'https://l-z-mount-bjh.herokuapp.com/'
+  origin: 'https://l-z-mount-bjh.herokuapp.com'
 }
 // corsOptions
 app.use(cors(corsOptions));
