@@ -10,11 +10,11 @@ var PORT = process.env.PORT || 3005;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// var corsOptions = {
-//   origin: 'https://litzia-front.herokuapp.com/'
-// }
+var corsOptions = {
+  origin: 'https://l-z-mount-bjh.herokuapp.com'
+}
 // corsOptions
-app.use(cors());
+app.use(cors(corsOptions));
 
 const adminRoutes = require("./routes/admin-routes");
 const productRoutes = require("./routes/product-routes");
@@ -29,7 +29,7 @@ app.use(cartRoutes);
 
 app.use(nodemailer);
 
-db.sequelize.sync({ force: false }).then(function () {
+db.sequelize.sync({ force: false}).then(function () {
   app.listen(PORT, function () {
     console.log("App listening on PORT http://localhost:" + PORT);
   });
