@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 const router = require("express").Router();
 
 router.post("/nodemailer", async (req, res) => {
-   let reciept = req.body.order.map(item => item.title + " " + item.price + " ----- ")
+   let reciept = req.body.order.map(item => item.title + "----- total quantity = " + item.quantity + "----$" +(item.totalCost ? item.totalCost + "not including shipping or tax." : item.price + "not including shipping or tax.")+ "  ----- " )
   
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -17,14 +17,14 @@ router.post("/nodemailer", async (req, res) => {
   let litzia = await transporter.sendMail({
     from: req.body.emailAddress, // sender address
     to: "thisisarandomtest123@gmail.com", // list of receivers. FOR LITZIA EMPLOYEES
-    subject: "Hello friend✔", // Subject line
+    subject: "Litzia Order✔", // Subject line
     text: "", // plain text body
     html: `${req.body.firstName}  ${req.body.lastName} has placed an order. ${req.body.address}, ${req.body.apartment}, ${req.body.city}, ${req.body.zipcode}, ${req.body.state}, ==================${req.body.email}, ${req.body.phoneNumber}, ${req.body.address}, ===========================${reciept}`, // html body
   });
   let customer = await transporter.sendMail({
     from: req.body.emailAddress, // sender address
     to: req.body.email, // list of receivers
-    subject: "Hello friend✔", // Subject line
+    subject: "Litzia Order✔", // Subject line
     text: "", // plain text body
     html: `${req.body.firstName} , thank you for your order! Here is a summery of your order. ${reciept.toString()} Please feel free to contact a Litzia representative if there are any questions or concerns.`, // html body
   });
@@ -35,6 +35,7 @@ router.post("/nodemailer", async (req, res) => {
   // Preview only available when sending through an Ethereal account
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(customer));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  res.json(customer)
 });
 
 module.exports = router;
