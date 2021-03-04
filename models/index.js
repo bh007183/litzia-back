@@ -23,7 +23,7 @@ if (process.env.JAWSDB_URL) {
       config
     );
   }
-};
+// };
 
 fs.readdirSync(__dirname)
   .filter((file) => {

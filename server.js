@@ -13,7 +13,7 @@ app.use(express.json());
 var corsOptions = {
   origin: 'https://l-z-mount-bjh.herokuapp.com'
 }
-// corsOptions
+// corsOptionscorsOptions
 app.use(cors(corsOptions));
 
 const adminRoutes = require("./routes/admin-routes");
