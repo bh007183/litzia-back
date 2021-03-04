@@ -10,11 +10,11 @@ var PORT = process.env.PORT || 3005;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-var corsOptions = {
-  origin: 'https://l-z-mount-bjh.herokuapp.com'
-}
-// corsOptions
-app.use(cors(corsOptions));
+// var corsOptions = {
+//   origin: 'https://l-z-mount-bjh.herokuapp.com'
+// }
+// corsOptionscorsOptions
+app.use(cors());
 
 const adminRoutes = require("./routes/admin-routes");
 const productRoutes = require("./routes/product-routes");
