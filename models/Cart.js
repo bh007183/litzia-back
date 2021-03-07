@@ -17,12 +17,12 @@ module.exports = function (sequelize, DataTypes) {
     quantity: { type: DataTypes.INTEGER, defaultValue: 1 },
 
     price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(10,2),
       allowNull: false,
     },
 
     totalCost: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(10,2),
     },
   });
   Cart.associate = function (models) {

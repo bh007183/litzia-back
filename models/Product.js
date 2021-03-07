@@ -24,10 +24,7 @@ module.exports = function (sequelize, DataTypes) {
     subCategory: { type: DataTypes.STRING },
 
     price: {
-      type: DataTypes.INTEGER,
-    },
-    price: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(10,2),
     },
 
     quantity: {

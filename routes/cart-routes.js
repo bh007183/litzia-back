@@ -127,7 +127,8 @@ router.post("/api/cart", async (req, res) => {
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<UPDATE TO SHOPPING CART>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 router.put("/api/cart/", async (req, res) => {
-  console.log(req.body.id);
+  console.log(req.body.id + "blummer");
+  let test = []
   for (let i = 0; i < req.body.length; i++) {
     console.log(req.body[i]);
     const data = await db.Cart.update(req.body[i], {
@@ -135,10 +136,11 @@ router.put("/api/cart/", async (req, res) => {
     }).catch((err) => {
       console.error(err);
       res.status(500);
-    });
-    console.log(data);
+    })
+    test.push(req.body[i].totalCost)
   }
-  res.json("hello").status(200).end();
+  // let realdata = await db.Cart.findAll({where: test})
+  res.send(test).status(200).end();
 });
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<< Get Route>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

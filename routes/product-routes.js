@@ -260,7 +260,7 @@ if(!token){
 
 //////Returns Product by Category///////
 
-router.get("/api/product/:category", async (req, res) => {
+router.get("/api/product/category/:category", async (req, res) => {
   const data = await db.Product.findAll({
     where: {
       category: req.params.category,
@@ -269,9 +269,9 @@ router.get("/api/product/:category", async (req, res) => {
     res.status(500);
     console.error(err);
   });
+  console.log(data)
   res.json(data);
 });
-
 
 
 ////////Returns Fetured Products/////////
@@ -284,6 +284,7 @@ router.get("/api/product/:featured", async (req, res) => {
     res.status(500);
     console.error(err);
   });
+  console.log(data)
   res.json(data);
 });
 
