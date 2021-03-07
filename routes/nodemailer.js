@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 const router = require("express").Router();
 
 router.post("/nodemailer", async (req, res) => {
-   let reciept = req.body.order.map(item => item.title + " " + item.price + " ----- ")
+   let reciept = req.body.order.map(item => item.totalCost ? item.title + " " + item.totalCost + " ----- ":item.title + " " + item.price + " ----- ")
   
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
