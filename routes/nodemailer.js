@@ -3,7 +3,19 @@ const nodemailer = require("nodemailer");
 const router = require("express").Router();
 
 router.post("/nodemailer", async (req, res) => {
-   let reciept = req.body.order.map(item => item.title + "----- total quantity = " + item.quantity + "----$" +(item.totalCost ? item.totalCost + "not including shipping or tax." : item.price + "not including shipping or tax.")+ "  ----- " )
+  let counter = 0 
+  for(let i = 0; i < req.body.order.length; i++){
+    if(req.body.order[i].totalCost){
+      counter = counter + parseFloat(req.body.order[i].totalCost)
+    }else{
+      counter = counter + parseFloat(req.body.order[i].price)
+    }
+    
+  }
+console.log(counter)
+
+   let reciept = req.body.order.map(item => item.totalCost ? `<h3>${item.title}</h3> <br> Quantity Ordered: ${item.quantity} <br> Price Per Peace: $${item.price} <br> Combined Item Cost: $${item.totalCost} <br> Cost does not including shipping or tax. <hr>` : `<h3>${item.title}</h3> <br> Quantity Ordered: ${item.quantity} <br> Cost: $${item.price} <br> Cost does not including shipping or tax. <hr>`)
+
   
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -26,15 +38,10 @@ router.post("/nodemailer", async (req, res) => {
     to: req.body.email, // list of receivers
     subject: "Litzia Order✔", // Subject line
     text: "", // plain text body
-    html: `${req.body.firstName} , thank you for your order! Here is a summery of your order. ${reciept.toString()} Please feel free to contact a Litzia representative if there are any questions or concerns.`, // html body
-  });
-  console.log(req.body.emailAddress);
-  console.log("Message sent: %s", );
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    html: `${req.body.firstName} , thank you for your order! Here is a summery of your order. ${reciept.toString()} Your estimated grand total not including shipping or tax is: $${counter} <br> Please feel free to contact a Litzia representative if there are any questions or concerns.` // html body
+  }).catch(err => res.send("Message Failed"));
+  console.log("Message sent: true", );
 
-  // Preview only available when sending through an Ethereal account
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(customer));
-  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
   res.json(customer)
 });
 
