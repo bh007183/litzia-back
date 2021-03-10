@@ -187,15 +187,15 @@ router.get("/api/product/search/:title", async (req, res) => {
 
 /////////Admin Protected/////////////
 ////////DELETE PRODUCTS//////////////
-router.delete("/api/product/delete", async (req, res) => {
+router.delete("/api/product/delete/:id", async (req, res) => {
   console.log(req.headers)
   let token = false
 if(!req.headers){
   token = false
-}else if (!req.headers.authentication){
+}else if (!req.headers.authorization){
   token = false
 }else{
-  token = req.headers.authentication.split(" ")[1]
+  token = req.headers.authorization.split(" ")[1]
   console.log(token)
 }
 if(!token){
@@ -211,7 +211,7 @@ if(!token){
   if(varify.admin === true){
     const data = await db.Product.destroy({
       where: {
-        id: req.body.id
+        id: req.params.id
       }
     }).catch((err) => {
       res.status(500);
