@@ -197,5 +197,43 @@ router.delete("/api/cart/items/:id", async (req, res) => {
 });
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<FUNCTIONS>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+router.delete("/api/emptycart", async (req, res) => {
+  console.log(req.headers);
+  let token = false;
+  if (!req.headers) {
+    token = false;
+  } else if (!req.headers.authorization) {
+    token = false;
+  } else {
+    token = req.headers.authorization.split(" ")[1];
+    console.log(token)
+  }
+  if (!token) {
+    res.status(403).send("log in to see your cart");
+  } else {
+    const data = jwt.verify(token, process.env.JSON_TOKIO, (err, data) => {
+      if (err) {
+        return false;
+      } else {
+        return data;
+      }
+    });
+    if (data) {
+      console.log(data)
+      const resData = await db.Cart.destroy({
+        where: {
+          AdminId: data.id,
+        },
+      }).catch((err) => {
+        console.error(err);
+        res.status(500);
+      });
+      res.json(resData).status(200).end();
+      console.log(resData);
+    } else {
+      res.status(403).send("auth fail");
+    }
+  }
+});
 
 module.exports = router;
