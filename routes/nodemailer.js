@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 const router = require("express").Router();
 
 router.post("/nodemailer", async (req, res) => {
+  console.log(req.body.email)
   let counter = 0 
   for(let i = 0; i < req.body.order.length; i++){
     if(req.body.order[i].totalCost){
@@ -33,6 +34,7 @@ console.log(counter)
     text: "", // plain text body
     html: `${req.body.firstName}  ${req.body.lastName} has placed an order. ${req.body.address}, ${req.body.apartment}, ${req.body.city}, ${req.body.zipcode}, ${req.body.state}, ==================${req.body.email}, ${req.body.phoneNumber}, ${req.body.address}, ===========================${reciept}`, // html body
   });
+  console.log(req.body.email + "test")
   let customer = await transporter.sendMail({
     from: req.body.emailAddress, // sender address
     to: req.body.email, // list of receivers
