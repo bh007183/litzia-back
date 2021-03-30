@@ -114,6 +114,7 @@ router.post("/api/cart", async (req, res) => {
         image: req.body.image,
         description: req.body.description,
         price: req.body.price,
+        totalCost: req.body.price,
       }).catch((err) => {
         console.error(err);
         res.status(500);
