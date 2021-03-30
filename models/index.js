@@ -9,9 +9,9 @@ const config = require(__dirname + "/../config/config.json")[env];
 const db = {};
 
 let sequelize;
-// if (process.env.JAWSDB_URL) {
-//   sequelize = new Sequelize(process.env.JAWSDB_URL)  
-// } else { 
+if (process.env.JAWSDB_URL) {
+  sequelize = new Sequelize(process.env.JAWSDB_URL)  
+} else { 
 
   if (config.use_env_variable) {
     sequelize = new Sequelize(process.env[config.use_env_variable], config);
@@ -23,7 +23,7 @@ let sequelize;
       config
     );
   }
-// };
+};
 
 fs.readdirSync(__dirname)
   .filter((file) => {
